@@ -1,6 +1,7 @@
 module.exports = {
   env: {
     node: true,
+    'vue/setup-compiler-macros': true
   },
   extends: [
     'eslint:recommended',
@@ -8,6 +9,6 @@ module.exports = {
     'prettier'
   ],
   rules: {
-    'no-undef': 'warn'
+    'vue/script-setup-uses-vars': 'error',
   }
 }
