@@ -9,6 +9,7 @@ module.exports = {
     'prettier'
   ],
   rules: {
+    'no-undef': 'off',
     'vue/script-setup-uses-vars': 'error',
   }
 }
