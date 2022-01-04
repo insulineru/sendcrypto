@@ -1,6 +1,7 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@iconify/vue': ^3.1.1
   '@tailwindcss/forms': ^0.4.0
   '@types/tailwindcss': ^3.0.1
   '@vitejs/plugin-vue': ^2.0.0
@@ -21,6 +22,7 @@ dependencies:
   vue: 3.2.26
 
 devDependencies:
+  '@iconify/vue': 3.1.1_vue@3.2.26
   '@types/tailwindcss': 3.0.1
   '@vitejs/plugin-vue': 2.0.1_vite@2.7.10+vue@3.2.26
   autoprefixer: 10.4.1
@@ -412,6 +414,15 @@ packages:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
 
+  /@iconify/vue/3.1.1_vue@3.2.26:
+    resolution: {integrity: sha512-lpRis4y8XHx0LQG1pbD71BuDlYKzCG3xKNsTs6svajQQe1DgkBbt1PEERnJTnmo9UzihTR0Bq7OwPQt7zR25RQ==}
+    peerDependencies:
+      vue: 3.x
+    dependencies:
+      cross-fetch: 3.1.4
+      vue: 3.2.26
+    dev: true
+
   /@nodelib/fs.scandir/2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
     engines: {node: '>= 8'}
@@ -790,6 +801,12 @@ packages:
       parse-json: 5.2.0
       path-type: 4.0.0
       yaml: 1.10.2
+    dev: true
+
+  /cross-fetch/3.1.4:
+    resolution: {integrity: sha512-1eAtFWdIubi6T4XPy6ei9iUFoKpUkIF971QLN8lIvvvwueI65+Nw5haMNKUwfJxabqlIIDODJKGrQ66gxC0PbQ==}
+    dependencies:
+      node-fetch: 2.6.1
     dev: true
 
   /cross-spawn/7.0.3:
@@ -1579,6 +1596,11 @@ packages:
 
   /natural-compare/1.4.0:
     resolution: {integrity: sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=}
+    dev: true
+
+  /node-fetch/2.6.1:
+    resolution: {integrity: sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw==}
+    engines: {node: 4.x || >=6.0.0}
     dev: true
 
   /node-releases/2.0.1:
