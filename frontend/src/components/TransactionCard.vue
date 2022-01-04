@@ -5,31 +5,39 @@
     <div class="flex flex-col items-center w-full mt-3">
       <div class="display-flex justify-start w-full mb-6 p-2">
         <a
-          :href="`https://ropsten.etherscan.io/address/${addressFrom}`"
+          :href="`https://ropsten.etherscan.io/address/${props.addressFrom}`"
           target="_blank"
           rel="noreferrer"
         >
-          <p class="text-white text-base">От: 0x....1337</p>
+          <p class="text-white text-base">От: {{ shortenAddress(props.addressFrom) }}</p>
         </a>
         <a
-          :href="`https://ropsten.etherscan.io/address/${addressTo}`"
+          :href="`https://ropsten.etherscan.io/address/${props.addressTo}`"
           target="_blank"
           rel="noreferrer"
         >
-          <p class="text-white text-base">Кому: 0x....228</p>
+          <p class="text-white text-base">Кому: {{ shortenAddress(props.addressTo) }}</p>
         </a>
-        <p class="text-white text-base">Сумма: 0,228 ETH</p>
+        <p class="text-white text-base">Сумма: {{ amount }} ETH</p>
 
         <br />
-        <p class="text-white text-base">Сообщение: test</p>
+
+        <template v-if="props.message">
+          <p class="text-white text-base">Сообщение: {{ message }}</p>
+        </template>
+        <br v-else />
+
       </div>
-      <img src="https://metro.co.uk/wp-content/uploads/2015/05/pokemon_crying.gif?quality=90&strip=all&zoom=1&resize=500%2C284" class="w-full h-64 2xl:h-96 rounded-md shadow-lg object-cover" />
+
+      <img :src="url" class="w-full h-64 2xl:h-96 rounded-md shadow-lg object-cover" />
       <div class="bg-black p-3 px-5 w-max rounded-3xl -mt-5 shadow-2xl">
-        <p class="text-[#37c7da] font-bold">04.01.2021, 17:00</p>
+        <p class="text-[#37c7da] font-bold">{{ timestamp }}</p>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
+import { shortenAddress } from "@/utils/shortenAddress"
+const props = defineProps(['url', 'message', 'timestamp', 'addressFrom', 'amount', 'addressTo'])
 </script>

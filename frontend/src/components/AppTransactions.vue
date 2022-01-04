@@ -1,21 +1,24 @@
 <template>
   <div class="flex w-full justify-center items-center 2xl:px-20 gradient-bg-transactions">
     <div class="flex flex-col md:p-12 py-12 px-4">
-      <h3 v-if="currentAccount" class="text-white text-3xl text-center my-2">
-        Latest Transactions
-      </h3>
-      <h3 v-else class="text-white text-3xl text-center my-2">
-        Connect your account to see the latest transactions
-      </h3>
+      <h3 v-if="currentAccount" class="text-white text-3xl text-center my-2">Latest Transactions</h3>
+      <h3
+        v-else
+        class="text-white text-3xl text-center my-2"
+      >Connect your account to see the latest transactions</h3>
 
       <div class="flex flex-wrap justify-center items-center mt-10">
         <!-- Transactions -->
-        <transaction-card />
-        <transaction-card />
-        <transaction-card />
-        <transaction-card />
-        <transaction-card />
-        <transaction-card />
+        <transaction-card
+          v-for="transaction in dummyData"
+          :key="transaction.id"
+          :message="transaction.message"
+          :url="transaction.url"
+          :address-from="transaction.addressFrom"
+          :address-to="transaction.addressTo"
+          :timestamp="transaction.timestamp"
+          :amount="transaction.amount"
+        />
       </div>
     </div>
   </div>
@@ -23,4 +26,5 @@
 
 <script setup>
 import TransactionCard from "@/components/TransactionCard.vue"
+import dummyData from "@/utils/dummyData"
 </script>
