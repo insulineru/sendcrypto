@@ -1,9 +1,6 @@
-const defaultTheme = require('tailwindcss/defaultTheme')
-
 /** @type {import("@types/tailwindcss/tailwind-config").TailwindConfig } */
 module.exports = {
   content: ['./index.html', './src/**/*.{vue,js}'],
-  darkMode: false,
   theme: {
     fontFamily: {
       display: ["Open Sans", "sans-serif"],
