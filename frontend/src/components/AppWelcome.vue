@@ -10,8 +10,10 @@
           class="text-left mt-5 text-white font-light md:w-9/12 w-11/12 text-base"
         >Изучайте крипторынок. Покупайте и продавайте криптовалюту с нами!</p>
         <button
+          v-if="!props.account"
           class="flex flex-row justify-center items-center my-5 bg-[#2952e3] text-white p-3 rounded-full cursor-pointer hover:bg-[#2546bd]"
           type="button"
+          @click="connectWallet"
         >
           <app-icon icon="bi:play-circle-fill" class="mr-2" />
           <p class="text-white font-semibold">Подключить Metamask</p>
@@ -41,7 +43,7 @@
               <app-icon icon="bi:info-circle" class="text-white" width="17" />
             </div>
             <div>
-              <p class="text-white font-light text-sm">0x.....asd</p>
+              <p class="text-white font-light text-sm">{{ shortenAddress(props.account) }}</p>
               <p class="text-white font-semibold text-lg mt-1">Ethereum</p>
             </div>
           </div>
@@ -59,7 +61,9 @@
           <div class="h-[1px] w-full bg-gray-400 my-2" />
 
           <base-loader v-if="isLoading" />
+          <p v-else-if="!props.account" class="text-red-600 text-center font-bold">Сначала необходимо подключить MetaMask</p>
           <button
+            v-else
             type="submit"
             class="text-white w-full mt-2 border-[1px] p-2 border-[#3d4f7c] hover:bg-[#3d4f7c] rounded-full cursor-pointer"
           >Отправить</button>
@@ -74,16 +78,45 @@ import { Icon as AppIcon } from "@iconify/vue"
 import BaseLoader from "@/components/base/BaseLoader.vue"
 import BaseInput from "@/components/base/BaseInput.vue"
 
-const cardStyles = "min-h-[70px] sm:px-0 px-2 sm:min-w-[120px] flex justify-center items-center border-[0.5px] border-gray-400 text-sm font-light text-white"
+import { shortenAddress } from '@/utils/shortenAddress.js'
 
-const isLoading = ref(false)
+const props = defineProps(['account', 'isLoading'])
+const emit = defineEmits(['setAccount', 'sendEth'])
+
+const cardStyles = "min-h-[70px] sm:px-0 px-2 sm:min-w-[120px] flex justify-center items-center border-[0.5px] border-gray-400 text-sm font-light text-white"
 
 const address = ref('')
 const amount = ref('')
 const gif = ref('')
 const message = ref('')
 
-const sendEth = () => {
-  isLoading.value = true
+const connectWallet = async () => {
+  try {
+    const { ethereum } = window
+    if (!ethereum) {
+      return
+    }
+    const accounts = await ethereum.request({
+      method: 'eth_requestAccounts',
+    })
+
+    if (accounts.length !== 0) {
+      emit('setAccount', accounts[0])
+    }
+  } catch (error) {
+    console.log(error)
+  }
 }
+
+const sendEth = () => {
+  const formData = {
+    address: address.value,
+    amount: amount.value,
+    keyword: gif.value,
+    message: message.value
+  }
+
+  emit('sendEth', formData)
+}
+
 </script>
