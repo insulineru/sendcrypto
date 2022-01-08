@@ -15,6 +15,7 @@
           :url="transaction.url"
           :address-from="transaction.addressFrom"
           :address-to="transaction.addressTo"
+          :keyword="transaction.keyword"
           :timestamp="transaction.timestamp"
           :amount="transaction.amount"
         />

@@ -26,10 +26,9 @@
           <p class="text-white text-base">Сообщение: {{ message }}</p>
         </template>
         <br v-else />
-
       </div>
 
-      <img :src="url" class="w-full h-64 2xl:h-96 rounded-md shadow-lg object-cover" />
+      <img :src="gifUrl" class="w-full h-64 2xl:h-96 rounded-md shadow-lg object-cover" />
       <div class="bg-black p-3 px-5 w-max rounded-3xl -mt-5 shadow-2xl">
         <p class="text-[#37c7da] font-bold">{{ timestamp }}</p>
       </div>
@@ -39,5 +38,21 @@
 
 <script setup>
 import { shortenAddress } from "@/utils/shortenAddress"
-const props = defineProps(['url', 'message', 'timestamp', 'addressFrom', 'amount', 'addressTo'])
+const props = defineProps(['url', 'message', 'timestamp', 'addressFrom', 'amount', 'addressTo', 'keyword'])
+
+const API_KEY = import.meta.env.VITE_GIPHY_KEY
+const gifUrl = ref('')
+
+const fetchGif = async () => {
+  try {
+    const response = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=${props.keyword.split(' ').join('')}&limit=1`)
+    const { data } = await response.json()
+
+    gifUrl.value = data[0].images.downsized_medium.url
+  } catch (error) {
+    gifUrl.value = 'https://metro.co.uk/wp-content/uploads/2015/05/pokemon_crying.gif?quality=90&strip=all&zoom=1&resize=500%2C284'
+  }
+}
+
+onMounted(() => fetchGif())
 </script>
